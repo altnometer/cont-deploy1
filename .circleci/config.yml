@@ -1,11 +1,17 @@
-machine:
-  services:
-    - docker
+version: 2
+jobs:
+  build:
+    # docker:
+        # - docker build -t redmoo/sample-node .
+        # specify the version you desire here
+    steps:
+        - run:
+            name: build docker container
+            command: - docker build -t redmoo/sample-node .
+        - run:
+            name: test the build
+            command: - docker run redmoo/sample-node npm test
 
-dependencies:
-  override:
-    - docker build -t redmoo/sample-node .
 
-test:
-  override:
-    - docker run redmoo/sample-node npm test
+            test:
+            override:
